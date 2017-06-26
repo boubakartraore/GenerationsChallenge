@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back2"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/txtPos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="Rg" />
+
+        <TextView
+            android:id="@+id/textView00"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.4"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textPts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="Pts" />
+
+        <TextView
+            android:id="@+id/txtJoué"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="J" />
+
+        <TextView
+            android:id="@+id/txtVictoire"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="V" />
+
+        <TextView
+            android:id="@+id/txtNul"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="N" />
+
+        <TextView
+            android:id="@+id/txtDefaite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="D" />
+
+        <TextView
+            android:id="@+id/txtGoalScored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="BM" />
+
+        <TextView
+            android:id="@+id/txtGoalConceded"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="BP" />
+
+        <TextView
+            android:id="@+id/txtDifference"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.075"
+            android:text="+/-" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="10dp"
+        android:id="@+id/team_classement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

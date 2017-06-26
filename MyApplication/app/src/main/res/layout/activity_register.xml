@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back2">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/register_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="TextView"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/register_photo"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:src="@drawable/add_pic"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/register_selectPhotoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selectionner une image"
+                            android:layout_gravity="center"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_firstname"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/firstname"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_lastname"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/lastname"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_mail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/mail"
+                                android:inputType="textEmailAddress" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/password"
+                                android:inputType="textPassword" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_confirmedpassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/passwordconfirmed"
+                                android:inputType="textPassword" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
+
+                            <EditText
+                                android:id="@+id/register_telephone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="@string/phone"
+                                android:inputType="phone" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/register_team"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="TextView"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                        <Spinner
+                            android:id="@+id/register_teamid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"/>
+
+                        <Spinner
+                            android:id="@+id/register_poste"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp" />
+
+                        <Button
+                            android:id="@+id/register_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/register" />
+                </LinearLayout>
+
+
+        </ScrollView>
+
+
+</LinearLayout>
