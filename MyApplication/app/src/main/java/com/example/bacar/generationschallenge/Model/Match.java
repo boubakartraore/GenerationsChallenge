@@ -14,6 +14,7 @@ public class Match {
     private String equipeExterieur;
     private Integer scoreEquipeDomicile;
     private Integer scoreEquipeExterieur;
+    private Boolean played;
 
     public Match() {
         this.journée = 0;
@@ -22,6 +23,15 @@ public class Match {
         this.equipeExterieur = "";
         this.scoreEquipeDomicile = 0;
         this.scoreEquipeExterieur = 0;
+        this.played = Boolean.FALSE;
+    }
+
+    public Boolean getPlayed() {
+        return played;
+    }
+
+    public void setPlayed(Boolean played) {
+        this.played = played;
     }
 
     public Match(Integer journee, Date date, String equipeDomicile, String equipeExterieur, Integer scoreEquipeDomicile, Integer scoreEquipeExterieur) {
@@ -31,6 +41,8 @@ public class Match {
         this.equipeExterieur = equipeExterieur;
         this.scoreEquipeDomicile = scoreEquipeDomicile;
         this.scoreEquipeExterieur = scoreEquipeExterieur;
+        this.played = Boolean.FALSE;
+
     }
 
     public Integer getJournée() {

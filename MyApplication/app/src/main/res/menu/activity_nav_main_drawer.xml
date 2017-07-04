@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/menu_profile"
             android:title="@string/myProfil" />
     </group>
 
@@ -15,19 +15,19 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_teams"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/menu_team"
                     android:title="@string/teams" />
                 <item
                     android:id="@+id/nav_season"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/menu_calendrier"
                     android:title="@string/calendarResults" />
                 <item
                     android:id="@+id/nav_classement"
-                    android:icon="@drawable/ic_menu_slideshow"
+                    android:icon="@drawable/menu_classement"
                     android:title="@string/classement" />
                 <item
                     android:id="@+id/nav_scorers"
-                    android:icon="@drawable/ic_menu_slideshow"
+                    android:icon="@drawable/menu_buteur"
                     android:title="@string/classementScorer" />
             </group>
         </menu>
@@ -38,7 +38,7 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_rules"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/menu_reglement"
                     android:title="@string/rules" />
                 <item
                     android:id="@+id/nav_staff"
@@ -46,7 +46,7 @@
                     android:title="@string/staff" />
                 <item
                     android:id="@+id/nav_contact"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/menu_contact"
                     android:title="@string/contact" />
 
             </group>

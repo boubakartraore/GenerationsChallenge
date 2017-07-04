@@ -51,7 +51,7 @@ public class CalendarActivity extends AppCompatActivity {
         LinearLayoutManager myLayout = new LinearLayoutManager(this);
         calendarMatchs.setLayoutManager(myLayout);
 
-        for (Integer i = 1 ; i < 10 ; i++) {
+        for (Integer i = 1; i <= getJourneeMax(matchList) ; i++) {
             journée.add("Journée " + i.toString());
         }
 
@@ -90,12 +90,15 @@ public class CalendarActivity extends AppCompatActivity {
 
     public void CalendarMatch() {
         thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        thisMatch.setPlayed(Boolean.TRUE);
         matchList.add(thisMatch);
         thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 3", 2, 0);
         matchList.add(thisMatch);
         thisMatch = new Match(2, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        thisMatch.setPlayed(Boolean.TRUE);
         matchList.add(thisMatch);
         thisMatch = new Match(3, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        thisMatch.setPlayed(Boolean.TRUE);
         matchList.add(thisMatch);
         thisMatch = new Match(3, new Date(), "Equipe 1", "Equipe 2", 2, 0);
         matchList.add(thisMatch);
@@ -106,6 +109,7 @@ public class CalendarActivity extends AppCompatActivity {
         thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
         matchList.add(thisMatch);
         thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        thisMatch.setPlayed(Boolean.TRUE);
         matchList.add(thisMatch);
         thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
         matchList.add(thisMatch);
@@ -119,6 +123,16 @@ public class CalendarActivity extends AppCompatActivity {
         matchList.add(thisMatch);
         thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
         matchList.add(thisMatch);
+    }
+
+    private Integer getJourneeMax(List<Match> matches) {
+        Integer max = 0;
+        for (Integer i = 0; i < matches.size(); i++) {
+            if (max < matches.get(i).getJournée()) {
+                max = matches.get(i).getJournée();
+            }
+        }
+        return max;
     }
 
     @Override

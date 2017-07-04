@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 
 import com.example.bacar.generationschallenge.Controller.Season.CalendarActivity;
+import com.example.bacar.generationschallenge.Controller.Season.ResultActivity;
+import com.example.bacar.generationschallenge.Controller.Season.TeamCalendarActivity;
 import com.example.bacar.generationschallenge.Controller.myDate;
 import com.example.bacar.generationschallenge.Model.Match;
 import com.example.bacar.generationschallenge.R;
@@ -79,6 +81,23 @@ public class SeasonFragment extends Fragment {
                 startActivity(act);
             }
         });
+
+        seasonTeamCalendarImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(getActivity(), TeamCalendarActivity.class);
+                startActivity(act);
+            }
+        });
+
+        seasonResultsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(getActivity(), ResultActivity.class);
+                startActivity(act);
+            }
+        });
+
 
         return view;
     }

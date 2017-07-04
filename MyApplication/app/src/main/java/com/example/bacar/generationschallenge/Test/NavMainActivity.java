@@ -1,11 +1,15 @@
 package com.example.bacar.generationschallenge.Test;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -116,4 +120,47 @@ public class NavMainActivity extends AppCompatActivity
             }
         }
     }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+
+        switch(keyCode){
+
+            case KeyEvent.KEYCODE_BACK :// faire rien ;
+                Log.i("BTN", "backpressed: System.exit(0)");
+
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Quitter")
+                        .setMessage("Voulez vous vraiment quitter ?")
+                        .setPositiveButton(android.R.string.ok,
+                                new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        System.exit(0);
+                                    }
+                                })
+                        .setNegativeButton(android.R.string.cancel,
+                                new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        // AlertDialog.cancel();
+                                    }
+                                })
+                        .create()
+                        .show();
+
+                return true;
+
+
+        }
+
+
+        return false;
+    }
+
 }

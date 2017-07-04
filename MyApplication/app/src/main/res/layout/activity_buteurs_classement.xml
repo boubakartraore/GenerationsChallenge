@@ -3,204 +3,220 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
-    android:layout_margin="10dp">
+    android:padding="5dp">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="219dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center_horizontal"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:src="@drawable/podium"
+                android:layout_marginBottom="5dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/firstPhoto"
-                        android:layout_width="219dp"
-                        android:layout_height="62dp"
-                        app:srcCompat="@drawable/gris" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/first_medal"/>
 
-                    <TextView
-                        android:id="@+id/firstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView" />
-
-                    <TextView
-                        android:id="@+id/firstTeam"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="227dp"
-                android:layout_height="101dp"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                <android.support.v7.widget.CardView
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    android:layout_margin="5dp">
 
                     <LinearLayout
-                        android:layout_width="118dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
+                        <ImageView
+                            android:id="@+id/firstPhoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            app:srcCompat="@drawable/players" />
+
                         <TextView
-                            android:id="@+id/secondName"
+                            android:id="@+id/firstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
                             android:text="TextView" />
 
                         <TextView
-                            android:id="@+id/secondTeam"
+                            android:id="@+id/firstTeam"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
                             android:text="TextView" />
+
+                        <TextView
+                            android:id="@+id/firstGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="TextView" />
+
                     </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/secondPhoto"
-                        android:layout_width="110dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/gris" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/first_medal"/>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="258dp"
-                android:layout_height="107dp"
-                android:layout_gravity="end"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/thirdPhoto"
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/gris" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="220dp"
+                    android:layout_height="100dp"
+                    android:elevation="5dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
 
                     <LinearLayout
-                        android:layout_width="29dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/thirdName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                        <LinearLayout
+                            android:layout_width="118dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/thirdTeam"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            <TextView
+                                android:id="@+id/secondName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
+
+                            <TextView
+                                android:id="@+id/secondTeam"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
+
+                            <TextView
+                                android:id="@+id/secondGoal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/secondPhoto"
+                            android:layout_width="110dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/players" />
                     </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/second_medal"/>
 
-            <android.support.v7.widget.CardView
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/third_medal"/>
 
-                    <ImageView
-                        android:id="@+id/fourPhoto"
-                        android:layout_width="21dp"
+                <android.support.v7.widget.CardView
+                    android:layout_width="220dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="end"
+                    android:elevation="5dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/gris" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/fourName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        <ImageView
+                            android:id="@+id/thirdPhoto"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/players" />
 
-                    <TextView
-                        android:id="@+id/fourTeam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                        <LinearLayout
+                            android:layout_width="29dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+                            <TextView
+                                android:id="@+id/thirdName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/thirdTeam"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
 
-                    <TextView
-                        android:id="@+id/fifthName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                            <TextView
+                                android:id="@+id/thirdGoal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:text="TextView" />
 
-                    <TextView
-                        android:id="@+id/fifthTeam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/fifthPhoto"
-                        android:layout_width="109dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/btn_star" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/allButeurs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tout les buteurs" />
+                android:text="Tout les buteurs"
+                android:elevation="5dp"
+                android:background="@color/colorPrimary"
+                android:textColor="#17dced"/>
 
 
         </LinearLayout>

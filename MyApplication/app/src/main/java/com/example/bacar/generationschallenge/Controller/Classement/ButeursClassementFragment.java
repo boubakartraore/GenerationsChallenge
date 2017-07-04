@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bacar.generationschallenge.Controller.Adapter.PlayersListAdapter;
+import com.example.bacar.generationschallenge.Model.Equipe;
 import com.example.bacar.generationschallenge.Model.Joueurs;
 import com.example.bacar.generationschallenge.R;
 
@@ -28,22 +29,21 @@ public class ButeursClassementFragment extends Fragment {
 
     private List<Joueurs> play = new ArrayList<Joueurs>();
     private Joueurs j1;
+    private Equipe equipe;
+    private List<Equipe> maListe = new ArrayList<Equipe>();
 
     private TextView firstName;
     private TextView firstTeam;
+    private TextView firstGoal;
     private ImageView firstPhoto;
     private TextView secondName;
     private TextView secondTeam;
+    private TextView secondGoal;
     private ImageView secondPhoto;
     private TextView thirdName;
     private TextView thirdTeam;
+    private TextView thirdGoal;
     private ImageView thirdPhoto;
-    private TextView fourName;
-    private TextView fourTeam;
-    private ImageView fourPhoto;
-    private TextView fifthName;
-    private TextView fifthTeam;
-    private ImageView fifthPhoto;
     private Button allButeurs;
 
     @Nullable
@@ -54,21 +54,20 @@ public class ButeursClassementFragment extends Fragment {
         firstName = (TextView) view.findViewById(R.id.firstName);
         firstTeam = (TextView) view.findViewById(R.id.firstTeam);
         firstPhoto = (ImageView) view.findViewById(R.id.firstPhoto);
+        firstGoal = (TextView) view.findViewById(R.id.firstGoal);
         secondName = (TextView) view.findViewById(R.id.secondName);
         secondTeam = (TextView) view.findViewById(R.id.secondTeam);
+        secondGoal = (TextView) view.findViewById(R.id.secondGoal);
         secondPhoto = (ImageView) view.findViewById(R.id.secondPhoto);
         thirdName = (TextView) view.findViewById(R.id.thirdName);
         thirdTeam = (TextView) view.findViewById(R.id.thirdTeam);
+        thirdGoal = (TextView) view.findViewById(R.id.thirdGoal);
         thirdPhoto = (ImageView) view.findViewById(R.id.thirdPhoto);
-        fourName = (TextView) view.findViewById(R.id.fourName);
-        fourTeam = (TextView) view.findViewById(R.id.fourTeam);
-        fourPhoto = (ImageView) view.findViewById(R.id.fourPhoto);
-        fifthName = (TextView) view.findViewById(R.id.fifthName);
-        fifthTeam = (TextView) view.findViewById(R.id.fifthTeam);
-        fifthPhoto = (ImageView) view.findViewById(R.id.fifthPhoto);
         allButeurs = (Button) view.findViewById(R.id.allButeurs);
 
         dataJoueur();
+
+        TeamMatch();
 
         Collections.sort(play, new Joueurs.JoueursComparator());
 
@@ -88,7 +87,7 @@ public class ButeursClassementFragment extends Fragment {
     private void dataJoueur() {
         j1 = new Joueurs(1, "Player 1", "Nom", "mail@mail.com", "tester", "Attaquant", 1, "0123445566", 1);
         play.add(j1);
-        j1 = new Joueurs(2, "Player 2", "Nom", "mail@mail.com", "tester", "Chef du projet", 1, "0123445566", 10);
+        j1 = new Joueurs(2, "Player 2", "Nom", "mail@mail.com", "tester", "Chef du projet", 3, "0123445566", 10);
         play.add(j1);
         j1 = new Joueurs(3, "Player 3", "Nom", "mail@mail.com", "tester", "Milieu", 1, "0123445566", 2);
         play.add(j1);
@@ -100,9 +99,9 @@ public class ButeursClassementFragment extends Fragment {
         play.add(j1);
         j1 = new Joueurs(7, "Player 7", "Nom", "mail@mail.com", "tester", "Chef du projet", 1, "0123445566", 12);
         play.add(j1);
-        j1 = new Joueurs(8, "Player 8", "Nom", "mail@mail.com", "tester", "Milieu", 1, "0123445566", 200);
+        j1 = new Joueurs(8, "Player 8", "Nom", "mail@mail.com", "tester", "Milieu", 3, "0123445566", 200);
         play.add(j1);
-        j1 = new Joueurs(9, "Player 9", "Nom", "mail@mail.com", "tester", "Defenseur", 1, "0123445566", 348);
+        j1 = new Joueurs(9, "Player 9", "Nom", "mail@mail.com", "tester", "Defenseur", 4, "0123445566", 348);
         play.add(j1);
         j1 = new Joueurs(10, "Player 10", "Nom", "mail@mail.com", "tester", "Defenseur", 1, "0123445566", 8);
         play.add(j1);
@@ -122,28 +121,33 @@ public class ButeursClassementFragment extends Fragment {
         Joueurs premier = list.get(0);
         Joueurs deuxieme = list.get(1);
         Joueurs troisieme = list.get(2);
-        Joueurs quatrieme = list.get(3);
-        Joueurs cinquieme = list.get(4);
 
         firstName.setText(premier.getFirstname() + " " + premier.getLastname());
-        firstTeam.setText(premier.getTeam_id().toString());
+        firstTeam.setText(maListe.get(premier.getTeam_id() - 1).getName());
+        firstGoal.setText(R.string.goalScored + ": " + premier.getGoal().toString());
         firstPhoto.setImageResource(R.drawable.players);
 
         secondName.setText(deuxieme.getFirstname() + " " +  deuxieme.getLastname());
-        secondTeam.setText(deuxieme.getTeam_id().toString());
+        secondTeam.setText(maListe.get(deuxieme.getTeam_id() - 1).getName());
+        secondGoal.setText(R.string.goalScored + ": " + deuxieme.getGoal().toString());
         secondPhoto.setImageResource(R.drawable.players);
 
         thirdName.setText(troisieme.getFirstname() + " " + troisieme.getLastname());
-        thirdTeam.setText(troisieme.getTeam_id().toString());
+        thirdTeam.setText(maListe.get(troisieme.getTeam_id() - 1).getName());
+        thirdGoal.setText(R.string.goalScored + ": " + premier.getGoal().toString());
         thirdPhoto.setImageResource(R.drawable.players);
+    }
 
-        fourName.setText(quatrieme.getFirstname() + " " + quatrieme.getLastname());
-        fourTeam.setText(quatrieme.getTeam_id().toString());
-        fourPhoto.setImageResource(R.drawable.players);
+    public void TeamMatch() {
+        equipe = new Equipe("Equipe 1", "Test", "Vert", 2,0,1,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 2", "Test", "Vert", 4,0,4,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 3", "Test", "Vert", 2,0,3,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 4", "Test", "Vert", 2,3,11,0,0);
+        maListe.add(equipe);
 
-        fifthName.setText(cinquieme.getFirstname() + " " + cinquieme.getLastname());
-        fifthTeam.setText(cinquieme.getTeam_id().toString());
-        fifthPhoto.setImageResource(R.drawable.players);
     }
 
     @Override

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bacar.generationschallenge.Controller.MainActivity;
+import com.example.bacar.generationschallenge.Model.Equipe;
 import com.example.bacar.generationschallenge.R;
 import com.example.bacar.generationschallenge.Test.NavMainActivity;
 import com.mvc.imagepicker.ImagePicker;
@@ -34,6 +35,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import android.net.Uri;
+
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +70,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String [] enregistrement;
     private List<String> lesPostes = new ArrayList<String>();
+    private List<String> spin = new ArrayList<String>();
+
+    private List<Equipe> maListe = new ArrayList<Equipe>();
+    private Equipe equipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +100,16 @@ public class RegisterActivity extends AppCompatActivity {
         register_team.setText(R.string.registerTeamText);
 
         R_poste();
+        TeamMatch();
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, lesPostes);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, spin);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         register_poste.setAdapter(adapter);
+        register_teamid.setAdapter(adapter1);
 
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +160,21 @@ public class RegisterActivity extends AppCompatActivity {
         lesPostes.add(poste);
         poste = "Gardien de but";
         lesPostes.add(poste);
+    }
+
+    public void TeamMatch() {
+        equipe = new Equipe("Equipe 1", "Test", "Vert", 2,0,1,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 2", "Test", "Vert", 4,0,4,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 3", "Test", "Vert", 2,0,3,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 4", "Test", "Vert", 2,3,11,0,0);
+        maListe.add(equipe);
+
+        for (int i = 0 ; i < maListe.size() ; i++) {
+            spin.add(maListe.get(i).getName());
+        }
     }
 
     @Override

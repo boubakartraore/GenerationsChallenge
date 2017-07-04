@@ -16,8 +16,8 @@
         <activity android:name=".Controller.Authentification.RegisterActivity" />
         <activity android:name=".Controller.Team.TeamInfoActivity" />
         <activity android:name=".Controller.Team.PlayersActivity" />
-        <activity android:name=".Controller.Classement.TeamClassementFragment" />
-        <activity android:name=".Controller.Classement.ButeursClassementFragment" />
+        <activity android:name=".Controller.Season.ResultActivity"></activity>
+        <activity android:name=".Controller.Season.TeamCalendarActivity"></activity>
         <activity android:name=".Controller.Classement.AllButeursClassementActivity" />
         <activity android:name=".Controller.Season.CalendarActivity" />
         <activity android:name=".Controller.SplashScreen">

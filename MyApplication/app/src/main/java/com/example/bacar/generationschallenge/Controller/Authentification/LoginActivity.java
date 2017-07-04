@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, NavMainActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Données incorrecte", Toast.LENGTH_SHORT).show();
                 }
