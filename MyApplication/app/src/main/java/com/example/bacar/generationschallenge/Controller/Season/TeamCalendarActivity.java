@@ -1,5 +1,7 @@
 package com.example.bacar.generationschallenge.Controller.Season;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -33,12 +35,20 @@ public class TeamCalendarActivity extends AppCompatActivity {
     private Match thisMatch;
     private Equipe equipe;
     private RecyclerView calendarMatchs;
+    private SharedPreferences sharedPreferences;
+    private int is_team_button;
+    private String rcv;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        sharedPreferences = this.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        is_team_button = sharedPreferences.getInt("Calendar Team", 0);
+
+        rcv = getIntent().getStringExtra("team");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -60,6 +70,11 @@ public class TeamCalendarActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         calendarDay.setAdapter(adapter);
+
+
+        if (is_team_button == 1) {
+            calendarDay.setSelection(getIndex(calendarDay, rcv));
+        }
 
         calendarDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,6 +127,18 @@ public class TeamCalendarActivity extends AppCompatActivity {
         matchList.add(thisMatch);
         thisMatch = new Match(1, new Date(), "Equipe 4", "Equipe 1", 2, 0);
         matchList.add(thisMatch);
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
     }
 
     @Override

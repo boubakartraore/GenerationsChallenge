@@ -53,7 +53,7 @@ public class PlayersActivity extends AppCompatActivity {
 
         j1 = new Joueurs(1, "Player 1", "Nom", "mail@mail.com", "tester", "Attaquant", 1, "0123445566", 1);
         play.add(j1);
-        j1 = new Joueurs(2, "Player 2", "Nom", "mail@mail.com", "tester", "Chef du projet", 1, "0123445566", 10);
+        j1 = new Joueurs(2, "Player 2", "Nom", "mail@mail.com", "tester", "Gardien de but", 1, "0123445566", 10);
         play.add(j1);
         j1 = new Joueurs(3, "Player 3", "Nom", "mail@mail.com", "tester", "Milieu", 1, "0123445566", 2);
         play.add(j1);

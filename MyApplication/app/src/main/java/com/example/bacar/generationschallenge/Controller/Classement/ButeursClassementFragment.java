@@ -134,7 +134,7 @@ public class ButeursClassementFragment extends Fragment {
 
         thirdName.setText(troisieme.getFirstname() + " " + troisieme.getLastname());
         thirdTeam.setText(maListe.get(troisieme.getTeam_id() - 1).getName());
-        thirdGoal.setText(R.string.goalScored + ": " + premier.getGoal().toString());
+        thirdGoal.setText(R.string.goalScored + ": " + troisieme.getGoal().toString());
         thirdPhoto.setImageResource(R.drawable.players);
     }
 

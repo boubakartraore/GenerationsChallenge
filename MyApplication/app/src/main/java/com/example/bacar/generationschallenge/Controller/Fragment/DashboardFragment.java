@@ -119,6 +119,21 @@ public class DashboardFragment extends Fragment {
             profilButton = (Button) view.findViewById(R.id.profilButton);
 
 
+            switch (player.getPoste()) {
+                case "Attaquant":
+                    profilPosteImage.setImageResource(R.drawable.poste_attaquant);
+                    break;
+                case "Milieu":
+                    profilPosteImage.setImageResource(R.drawable.poste_milieu);
+                    break;
+                case "Defenseur":
+                    profilPosteImage.setImageResource(R.drawable.poste_defenseur);
+                    break;
+                case "Gardien de but":
+                    profilPosteImage.setImageResource(R.drawable.poste_gardien);
+                    break;
+            }
+
             // on affecte les valeurs a la vue
             // Infos du joueur
             profilFirstname.setText(player.getFirstname());

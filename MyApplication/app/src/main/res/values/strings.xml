@@ -3,7 +3,7 @@
     <string name="loginTitle">Bienvenue</string>
     <string name="loginRegister">Pas encore de comptes ? Inscrivez vous ICI</string>
     <string name="connection">Connexion</string>
-    <string name="register">S'inscrire</string>
+    <string name="register">S\'inscrire</string>
     <string name="registerTitle">Inscription</string>
     <string name="firstname">Prénom</string>
     <string name="lastname">Nom de famille</string>
@@ -24,7 +24,7 @@
     <string name="profilTextLastMatch">Mon dernier match</string>
     <string name="allScorers">Tout les buteurs</string>
     <string name="myProfil">Mon profil</string>
-    <string name="registerTeamText">Infos d'équipe</string>
+    <string name="registerTeamText">Infos d\'équipe</string>
     <string name="selectPhoto">Séléctionnez une photo</string>
     <string name="title_activity_nav_main">NavMainActivity</string>
     <string name="teams">Les équipes</string>
@@ -41,6 +41,13 @@
     <string name="contact">Contact</string>
     <string name="nextMatch">Prochain match</string>
     <string name="goalScored">Buts marqués</string>
+    <string name="register1Title">Qui êtes vous ?</string>
+    <string name="register1Captain">Un entraineur et/ou un capitaine ?</string>
+    <string name="register1Joueur">Un joueur ?</string>
+    <string name="register1Invite">Un invité, supporter ou espion ?</string>
+    <string name="register2Title">Que voulez-vous ?</string>
+    <string name="register2Team">Inscrire votre équipe ?</string>
+    <string name="register2Joueur">Vous inscrire ?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

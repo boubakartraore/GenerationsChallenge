@@ -42,4 +42,8 @@ dependencies {
 
     // Anime text
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
+
+    // Server
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
 }

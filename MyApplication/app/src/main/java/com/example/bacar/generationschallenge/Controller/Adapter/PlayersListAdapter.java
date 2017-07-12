@@ -31,6 +31,7 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersListAdapter.
 
         View view;
         ImageView playerImage;
+        ImageView playerPosteImage;
         TextView playerFirstname;
         TextView playerLastname;
         TextView playerGoal;
@@ -43,6 +44,7 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersListAdapter.
             playerPoste = (TextView) itemPlayer.findViewById(R.id.playerPoste);
             playerGoal = (TextView) itemPlayer.findViewById(R.id.playerGoal);
             playerImage = (ImageView) itemPlayer.findViewById(R.id.playerImage);
+            playerPosteImage = (ImageView) itemPlayer.findViewById(R.id.playerPosteImage);
         }
     }
 
@@ -61,6 +63,21 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersListAdapter.
         parent.playerLastname.setText(joueurs.getLastname());
         parent.playerPoste.setText(joueurs.getPoste());
         parent.playerGoal.setText(joueurs.getGoal().toString());
+
+        switch (joueurs.getPoste()) {
+            case "Attaquant":
+                parent.playerPosteImage.setImageResource(R.drawable.poste_attaquant);
+                break;
+            case "Milieu":
+                parent.playerPosteImage.setImageResource(R.drawable.poste_milieu);
+                break;
+            case "Defenseur":
+                parent.playerPosteImage.setImageResource(R.drawable.poste_defenseur);
+                break;
+            case "Gardien de but":
+                parent.playerPosteImage.setImageResource(R.drawable.poste_gardien);
+                break;
+        }
     }
 
     @Override

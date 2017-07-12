@@ -13,13 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.Authentification.LoginActivity" />
-        <activity android:name=".Controller.Authentification.RegisterActivity" />
+        <activity android:name=".Controller.Authentification.RegisterActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".Controller.Team.TeamInfoActivity" />
         <activity android:name=".Controller.Team.PlayersActivity" />
         <activity android:name=".Controller.Season.ResultActivity"></activity>
         <activity android:name=".Controller.Season.TeamCalendarActivity"></activity>
         <activity android:name=".Controller.Classement.AllButeursClassementActivity" />
         <activity android:name=".Controller.Season.CalendarActivity" />
+        <activity android:name=".Controller.Authentification.RegisterPart1"></activity>
+        <activity android:name=".Controller.Authentification.RegisterInviteActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".Controller.Authentification.RegisterPart2Activity"></activity>
+        <activity android:name=".Controller.Authentification.RegisterTeamActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".Controller.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back2">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/registerTeamTextInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="Infos de l\'equipe"/>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#962fb9"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/registerTeamTakePhoto"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/add_pic"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/register_selectPhotoText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selectionner une image"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#962fb9"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/registerTeamName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Nom d'équipe"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/registerTeamColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Couleur du maillot"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/registerTeamNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Nombre de joueurs"
+                        android:inputType="number" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/registerTeamCaptainInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="Infos du Capitaine"/>
+
+            <include layout="@layout/register_player"></include>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.bacar.generationschallenge.Controller.Team;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.example.bacar.generationschallenge.Controller.Season.TeamCalendarActivity;
 import com.example.bacar.generationschallenge.Controller.myDate;
 import com.example.bacar.generationschallenge.Model.Equipe;
 import com.example.bacar.generationschallenge.Model.Match;
@@ -48,6 +51,7 @@ public class TeamInfoActivity extends AppCompatActivity {
     private TextView teamNextDay;
     private TextView teamNextMatchDate;
     private ImageView teamImage;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,7 +107,13 @@ public class TeamInfoActivity extends AppCompatActivity {
         teamCalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(TeamInfoActivity.this, TeamCalendarActivity.class);
+                sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("Calendar Team", 1);
+                editor.commit();
+                i.putExtra("team", rcv);
+                startActivity(i);
             }
         });
 

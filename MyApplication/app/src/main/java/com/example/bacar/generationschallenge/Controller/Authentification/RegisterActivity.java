@@ -47,33 +47,33 @@ import java.util.List;
 public class RegisterActivity extends AppCompatActivity {
 
     /***/
-    private final int select_photo = 1;
-    private Uri profileUri = null;
+    protected final int select_photo = 1;
+    protected Uri profileUri = null;
     /***/
 
-    private SharedPreferences sharedPreferences;
+    protected SharedPreferences sharedPreferences;
 
-    private TextView register_title;
-    private TextView register_selectPhotoText;
-    private ImageView registerPhoto;
-    private EditText register_firstname;
-    private EditText register_lastname;
-    private EditText register_mail;
-    private EditText register_password;
-    private EditText register_confirmedpassword;
-    private Spinner register_poste;
-    private Spinner register_teamid;
-    private EditText register_telephone;
-    private TextView register_team;
-    private Button register_button;
+    protected TextView register_title;
+    protected TextView register_selectPhotoText;
+    protected ImageView registerPhoto;
+    protected EditText register_firstname;
+    protected EditText register_lastname;
+    protected EditText register_mail;
+    protected EditText register_password;
+    protected EditText register_confirmedpassword;
+    protected Spinner register_poste;
+    protected Spinner register_teamid;
+    protected EditText register_telephone;
+    protected TextView register_team;
+    protected Button register_button;
 
 
-    private String [] enregistrement;
-    private List<String> lesPostes = new ArrayList<String>();
-    private List<String> spin = new ArrayList<String>();
+    protected String [] enregistrement;
+    protected List<String> lesPostes = new ArrayList<String>();
+    protected List<String> spin = new ArrayList<String>();
 
-    private List<Equipe> maListe = new ArrayList<Equipe>();
-    private Equipe equipe;
+    protected List<Equipe> maListe = new ArrayList<Equipe>();
+    protected Equipe equipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,20 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        init();
+
+        R_poste();
+
+        TeamMatch();
+
+        setObs();
+
+        action();
+
+    }
+
+    public void init(){
 
         register_firstname = (EditText) findViewById(R.id.register_firstname);
         register_lastname = (EditText) findViewById(R.id.register_lastname);
@@ -96,11 +110,9 @@ public class RegisterActivity extends AppCompatActivity {
         register_selectPhotoText = (TextView) findViewById(R.id.register_selectPhotoText);
         registerPhoto = (ImageView) findViewById(R.id.register_photo);
 
-        register_title.setText(R.string.registerTitle);
-        register_team.setText(R.string.registerTeamText);
+    }
 
-        R_poste();
-        TeamMatch();
+    public void setObs() {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, lesPostes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -110,6 +122,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         register_poste.setAdapter(adapter);
         register_teamid.setAdapter(adapter1);
+    }
+
+
+    public void action() {
 
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +153,11 @@ public class RegisterActivity extends AppCompatActivity {
                 _launchPickerIntent();
             }
         });
+
     }
 
 
-    private void register(String firstname, String lastname, String mail, String password, String poste, String team_id, String telephone) {
+    public void register(String firstname, String lastname, String mail, String password, String poste, String team_id, String telephone) {
         enregistrement[0] = firstname;
         enregistrement[1] = lastname;
         enregistrement[2] = mail;
@@ -150,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
         enregistrement[6] = telephone;
     }
 
-    private void R_poste () {
+    public void R_poste () {
         String poste;
         poste = "Attaquant";
         lesPostes.add(poste);

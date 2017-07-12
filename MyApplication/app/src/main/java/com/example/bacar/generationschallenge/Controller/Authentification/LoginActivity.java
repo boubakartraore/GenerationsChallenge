@@ -4,20 +4,32 @@ package com.example.bacar.generationschallenge.Controller.Authentification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bacar.generationschallenge.Controller.MainActivity;
+import com.example.bacar.generationschallenge.Model.Joueurs;
+import com.example.bacar.generationschallenge.Model.Network.RequestInterface;
+import com.example.bacar.generationschallenge.Model.Network.ServerPlayerRequest;
+import com.example.bacar.generationschallenge.Model.Network.ServerPlayerResponse;
 import com.example.bacar.generationschallenge.R;
 import com.example.bacar.generationschallenge.Test.NavMainActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView login_title;
     private TextView login_register;
     private Button login_button;
+    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         login_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterPart1.class);
                 startActivity(intent);
             }
         });
@@ -69,15 +82,19 @@ public class LoginActivity extends AppCompatActivity {
                     login_password.setError("Password cannot be empty");
                 }
 
-                if (email.equalsIgnoreCase("bacar@mail.com") && pass.equalsIgnoreCase("root")) {
-                    Toast.makeText(getApplicationContext(), "Vous etes correctement loggé", Toast.LENGTH_SHORT).show();
+                if (isValidEmail(email) && isValidPassword(pass))  {
+
+                    //progress.setVisibility(View.VISIBLE);
+
+                    loginProcess(email, pass);
+                    /*Toast.makeText(getApplicationContext(), "Vous etes correctement loggé", Toast.LENGTH_SHORT).show();
                     sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("Logged", 1);
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, NavMainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();*/
                 } else {
                     Toast.makeText(getApplicationContext(), "Données incorrecte", Toast.LENGTH_SHORT).show();
                 }
@@ -105,5 +122,55 @@ public class LoginActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+
+    private void loginProcess(String email,String password){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://orgemontcitychallenge.esy.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
+
+        Joueurs joueurs = new Joueurs();
+        joueurs.setMail(email);
+        joueurs.setPassword(password);
+        ServerPlayerRequest request = new ServerPlayerRequest();
+        request.setOperation("login");
+        request.setJoueur(joueurs);
+        Call<ServerPlayerResponse> response = requestInterface.operation(request);
+
+        response.enqueue(new Callback<ServerPlayerResponse>() {
+            @Override
+            public void onResponse(Call<ServerPlayerResponse> call, retrofit2.Response<ServerPlayerResponse> response) {
+
+                ServerPlayerResponse resp = response.body();
+                Toast.makeText(LoginActivity.this, resp.getMessage(), Toast.LENGTH_LONG).show();
+
+                if(resp.getResult().equals("success")){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("Logged", 1);
+                    editor.putString("mail",resp.getUser().getMail());
+                    editor.apply();
+                    Intent intent = new Intent(LoginActivity.this, NavMainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                //progress.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onFailure(Call<ServerPlayerResponse> call, Throwable t) {
+
+                progress.setVisibility(View.INVISIBLE);
+                Log.d("FAILURE","failed");
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
 
 }
