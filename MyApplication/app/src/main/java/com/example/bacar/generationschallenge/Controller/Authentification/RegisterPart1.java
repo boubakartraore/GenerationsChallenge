@@ -17,10 +17,10 @@ import com.example.bacar.generationschallenge.R;
 public class RegisterPart1 extends AppCompatActivity {
 
     private TextView register1Title;
-    private TextView register1TextCaptain;
+    //private TextView register1TextCaptain;
     private TextView register1TextJoueur;
     private TextView register1TextInvite;
-    private ImageView register1CaptainImage;
+    //private ImageView register1CaptainImage;
     private ImageView register1JoueurImage;
     private ImageView register1InviteImage;
 
@@ -32,29 +32,29 @@ public class RegisterPart1 extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         register1Title = (TextView) findViewById(R.id.register1Title);
-        register1TextCaptain = (TextView) findViewById(R.id.register1TextCaptain);
+        //register1TextCaptain = (TextView) findViewById(R.id.register1TextCaptain);
         register1TextJoueur = (TextView) findViewById(R.id.register1TextJoueur);
         register1TextInvite = (TextView) findViewById(R.id.register1TextInvite);
-        register1CaptainImage = (ImageView) findViewById(R.id.register1CaptainImage);
+        //register1CaptainImage = (ImageView) findViewById(R.id.register1CaptainImage);
         register1JoueurImage = (ImageView) findViewById(R.id.register1JoueurImage);
         register1InviteImage = (ImageView) findViewById(R.id.register1InviteImage);
 
         register1Title.setText(R.string.register1Title);
-        register1TextCaptain.setText(R.string.register1Captain);
+        //register1TextCaptain.setText(R.string.register1Captain);
         register1TextJoueur.setText(R.string.register1Joueur);
         register1TextInvite.setText(R.string.register1Invite);
-        register1CaptainImage.setImageResource(R.drawable.capitaine);
+        //register1CaptainImage.setImageResource(R.drawable.capitaine);
         register1JoueurImage.setImageResource(R.drawable.joueur);
         register1InviteImage.setImageResource(R.drawable.invite);
 
 
-        register1CaptainImage.setOnClickListener(new View.OnClickListener() {
+        /*register1CaptainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent act = new Intent(RegisterPart1.this, RegisterPart2Activity.class);
                 startActivity(act);
             }
-        });
+        });*/
 
         register1JoueurImage.setOnClickListener(new View.OnClickListener() {
             @Override

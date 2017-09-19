@@ -1,7 +1,9 @@
 package com.example.bacar.generationschallenge.Controller.Fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,20 +23,35 @@ public class ClassementFragment extends Fragment implements View.OnClickListener
 
     private ImageView classementButton;
     private ImageView buteursButton;
+    private SharedPreferences sharedPreferences;
+    private Integer logged;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.classement_fragment, container, false);
 
-        classementButton = (ImageView) view.findViewById(R.id.classementButton);
-        buteursButton = (ImageView) view.findViewById(R.id.buteursButton);
+        sharedPreferences = this.getActivity().getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        logged = sharedPreferences.getInt("Logged", 0);
 
-        classementButton.setOnClickListener(this);
-        buteursButton.setOnClickListener(this);
+        if (logged == 0) {
+            view = inflater.inflate(R.layout.not_logged_layout, container, false);
 
+            return view;
 
-        return view;
+        } else {
+
+            view = inflater.inflate(R.layout.classement_fragment, container, false);
+
+            classementButton = (ImageView) view.findViewById(R.id.classementButton);
+            buteursButton = (ImageView) view.findViewById(R.id.buteursButton);
+
+            classementButton.setOnClickListener(this);
+            buteursButton.setOnClickListener(this);
+
+            return view;
+        }
+
     }
 
     @Override

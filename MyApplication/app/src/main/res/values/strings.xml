@@ -8,7 +8,7 @@
     <string name="firstname">Prénom</string>
     <string name="lastname">Nom de famille</string>
     <string name="mail">Email</string>
-    <string name="phone">Téléphone</string>
+    <string name="username">Surnom</string>
     <string name="password">Mot de passe</string>
     <string name="passwordconfirmed">Cofirmation du mot de passe</string>
     <string name="poste">Poste</string>
@@ -42,14 +42,14 @@
     <string name="nextMatch">Prochain match</string>
     <string name="goalScored">Buts marqués</string>
     <string name="register1Title">Qui êtes vous ?</string>
-    <string name="register1Captain">Un entraineur et/ou un capitaine ?</string>
-    <string name="register1Joueur">Un joueur ?</string>
+    <string name="register1Joueur">Un joueur ou un capitaine ?</string>
     <string name="register1Invite">Un invité, supporter ou espion ?</string>
     <string name="register2Title">Que voulez-vous ?</string>
     <string name="register2Team">Inscrire votre équipe ?</string>
     <string name="register2Joueur">Vous inscrire ?</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="no_logged">Vous devez vous connecter pour avoir accès à ces informations</string>
+
 
 </resources>

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
     tools:context="com.example.bacar.generationschallenge.Controller.Authentification.LoginActivity">
 
     <RelativeLayout
@@ -80,7 +79,6 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="15dp"
             android:layout_below="@+id/login_button"
-            android:textColor="@color/white"
             android:text="Not registered yet ? Sign In HERE"
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="367dp" />

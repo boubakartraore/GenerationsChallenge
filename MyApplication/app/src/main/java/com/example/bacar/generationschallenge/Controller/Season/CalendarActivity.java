@@ -1,138 +1,215 @@
 package com.example.bacar.generationschallenge.Controller.Season;
 
-import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.bacar.generationschallenge.Controller.Adapter.CalendarAdapter;
+import com.example.bacar.generationschallenge.Controller.Adapter.ListTeamAdapter;
+import com.example.bacar.generationschallenge.Model.AllMatch;
+import com.example.bacar.generationschallenge.Model.Equipe;
 import com.example.bacar.generationschallenge.Model.Match;
+import com.example.bacar.generationschallenge.Model.Network.MatchInterface;
 import com.example.bacar.generationschallenge.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Bacar on 10/06/2017.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Created by Bacar on 27/06/2017.
+ */
 
 public class CalendarActivity extends AppCompatActivity {
 
     private Spinner calendarDay;
-    private List<String> journée = new ArrayList<String>();
+    private List<String> spin = new ArrayList<String>();
     private List<Match> matchList = new ArrayList<Match>();
+    private List<Equipe> maListe = new ArrayList<Equipe>();
     private Match thisMatch;
+    private Equipe equipe;
     private RecyclerView calendarMatchs;
+    private SharedPreferences sharedPreferences;
+    private int is_team_button;
+    private String rcv;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        sharedPreferences = this.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        is_team_button = sharedPreferences.getInt("Calendar Team", 0);
+
+        rcv = getIntent().getStringExtra("team");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         calendarDay = (Spinner) findViewById(R.id.calendarDay);
         calendarMatchs = (RecyclerView) findViewById(R.id.calendarMatchs);
 
-        CalendarMatch();
+
+        remplirSpinner(4);
+        //CalendarMatch();
+        //TeamMatch();
 
         LinearLayoutManager myLayout = new LinearLayoutManager(this);
         calendarMatchs.setLayoutManager(myLayout);
 
-        for (Integer i = 1; i <= getJourneeMax(matchList) ; i++) {
-            journée.add("Journée " + i.toString());
-        }
 
         final ArrayAdapter adapter = new ArrayAdapter(
-                this,
+                CalendarActivity.this,
                 android.R.layout.simple_spinner_item,
-                journée
+                spin
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         calendarDay.setAdapter(adapter);
 
+
+        if (is_team_button == 1) {
+            calendarDay.setSelection(getIndex(calendarDay, rcv));
+        }
+
         calendarDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                List<Match> curr = new ArrayList<Match>();
-                Match thisMatch = new Match();
-                for (int i = 0 ; i < matchList.size() ; i++) {
-                    thisMatch = matchList.get(i);
-                    if (thisMatch.getJournée() == position + 1){
-                        curr.add(thisMatch);
-                    }
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
 
-                CalendarAdapter adapter1 = new CalendarAdapter(curr);
-                calendarMatchs.setAdapter(adapter1);
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://bacar.000webhostapp.com")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                MatchInterface requestTeamInterface = retrofit.create(MatchInterface.class);
+
+                final Call<AllMatch> requete = requestTeamInterface.getMatch();
+
+                requete.enqueue(new Callback<AllMatch>() {
+
+                    @Override
+                    public void onResponse(Call<AllMatch> call, retrofit2.Response<AllMatch> response) {
+
+                        if (response.isSuccessful()) {
+
+                            AllMatch test = response.body();
+
+                            matchList = test.dayMatch(position + 1);
+
+                            CalendarAdapter adapter1 = new CalendarAdapter(matchList);
+                            calendarMatchs.setAdapter(adapter1);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AllMatch> call, Throwable t) {
+
+                        Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://bacar.000webhostapp.com")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                MatchInterface requestTeamInterface = retrofit.create(MatchInterface.class);
+
+                final Call<AllMatch> requete = requestTeamInterface.getMatch();
+
+                requete.enqueue(new Callback<AllMatch>() {
+
+                    @Override
+                    public void onResponse(Call<AllMatch> call, retrofit2.Response<AllMatch> response) {
+
+                        if (response.isSuccessful()) {
+
+                            AllMatch test = response.body();
+
+                            matchList = test.dayMatch(1);
+
+                            CalendarAdapter adapter1 = new CalendarAdapter(matchList);
+                            calendarMatchs.setAdapter(adapter1);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AllMatch> call, Throwable t) {
+
+                        Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
 
             }
         });
 
     }
 
-    public void CalendarMatch() {
-        thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        thisMatch.setPlayed(Boolean.TRUE);
-        matchList.add(thisMatch);
-        thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 3", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(2, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        thisMatch.setPlayed(Boolean.TRUE);
-        matchList.add(thisMatch);
-        thisMatch = new Match(3, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        thisMatch.setPlayed(Boolean.TRUE);
-        matchList.add(thisMatch);
-        thisMatch = new Match(3, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(3, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        thisMatch.setPlayed(Boolean.TRUE);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
-        thisMatch = new Match(1, new Date(), "Equipe 1", "Equipe 2", 2, 0);
-        matchList.add(thisMatch);
+    /*public void TeamMatch() {
+        equipe = new Equipe("Equipe 1", "Test", "Vert", 2,0,1,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 2", "Test", "Vert", 4,0,4,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 3", "Test", "Vert", 2,0,3,0,0);
+        maListe.add(equipe);
+        equipe = new Equipe("Equipe 4", "Test", "Vert", 2,3,11,0,0);
+        maListe.add(equipe);
+
+        for (int i = 0 ; i < maListe.size() ; i++) {
+            spin.add(maListe.get(i).getName());
+        }
     }
 
-    private Integer getJourneeMax(List<Match> matches) {
-        Integer max = 0;
-        for (Integer i = 0; i < matches.size(); i++) {
-            if (max < matches.get(i).getJournée()) {
-                max = matches.get(i).getJournée();
+    public void CalendarMatch() {
+        thisMatch = new Match(4, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        matchList.add(thisMatch);
+        thisMatch = new Match(2, new Date(), "Equipe 2", "Equipe 3", 2, 0);
+        matchList.add(thisMatch);
+        thisMatch = new Match(3, new Date(), "Equipe 3", "Equipe 4", 2, 0);
+        matchList.add(thisMatch);
+        thisMatch = new Match(1, new Date(), "Equipe 4", "Equipe 1", 2, 0);
+        matchList.add(thisMatch);
+    }*/
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
             }
         }
-        return max;
+        return index;
+    }
+
+    public void remplirSpinner (int i) {
+        for (int n = 1 ; n <= i ; n++) {
+            spin.add("Journée " + n);
+        }
     }
 
     @Override

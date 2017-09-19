@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,12 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bacar.generationschallenge.Model.Equipe;
+import com.example.bacar.generationschallenge.Model.Network.RequestInterface;
+import com.example.bacar.generationschallenge.Model.Network.ServerPlayerRequest;
+import com.example.bacar.generationschallenge.Model.Network.ServerPlayerResponse;
+import com.example.bacar.generationschallenge.Model.User;
 import com.example.bacar.generationschallenge.R;
 import com.example.bacar.generationschallenge.Test.NavMainActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Bacar on 04/07/2017.
@@ -77,20 +87,74 @@ public class RegisterInviteActivity extends AppCompatActivity {
                 if (!(register_password.getText().toString().equals(register_confirmedpassword.getText().toString()))){
                     Toast.makeText(getApplicationContext(), "Les mots de passes sont différents", Toast.LENGTH_LONG).show();
                 } else {
-                    sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("Logged", 1);
-                    editor.commit();
                     Toast.makeText(getApplicationContext(), "Inscrit", Toast.LENGTH_LONG).show();
-                    //register(register_firstname.getText().toString(), register_lastname.getText().toString(), register_mail.getText().toString(), register_password.getText().toString(), register_poste.toString(), register_teamid.toString(), register_telephone.toString());
-                    Intent intent = new Intent(RegisterInviteActivity.this, NavMainActivity.class);
-                    //intent.putExtra("enregistrement", enregistrement);
-                    startActivity(intent);
+                    registerProcess(register_firstname.getText().toString(), register_lastname.getText().toString(), register_mail.getText().toString(), register_password.getText().toString());
                 }
 
             }
         });
 
+    }
+
+
+    private void registerProcess(final String firstname, final String lastname, final String mail, String password){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://bacar.000webhostapp.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
+
+        final User user = new User();
+
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setMail(mail);
+        user.setPassword(password);
+        user.setUsername(" ");
+        user.setRole("Invite");
+        user.setPoste(" ");
+        user.setTeam_id(" ");
+
+        ServerPlayerRequest request = new ServerPlayerRequest();
+        request.setOperation("register");
+        request.setUser(user);
+
+        Call<ServerPlayerResponse> response = requestInterface.operation(request);
+
+        response.enqueue(new Callback<ServerPlayerResponse>() {
+            @Override
+            public void onResponse(Call<ServerPlayerResponse> call, retrofit2.Response<ServerPlayerResponse> response) {
+
+                ServerPlayerResponse resp = response.body();
+                Toast.makeText(RegisterInviteActivity.this, resp.getMessage(), Toast.LENGTH_LONG).show();
+
+                if(resp.getResult().equals("success")){
+                    sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("Logged", 2);
+                    editor.putString("lastname",lastname);
+                    editor.putString("firstname",firstname);
+                    editor.putString("mail",mail);
+                    editor.apply();
+                    Intent intent = new Intent(RegisterInviteActivity.this, NavMainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                //progress.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onFailure(Call<ServerPlayerResponse> call, Throwable t) {
+
+                //progress.setVisibility(View.INVISIBLE);
+                Log.d("FAILURE","failed");
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
 

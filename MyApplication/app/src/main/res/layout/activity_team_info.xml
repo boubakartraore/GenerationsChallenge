@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
     android:padding="10dp">
 
     <ImageView
@@ -137,25 +136,11 @@
                     android:text="nextMatchTeam1" />
 
                 <TextView
-                    android:id="@+id/nextMatchScore1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0" />
-
-                <TextView
                     android:id="@+id/separator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="-" />
-
-                <TextView
-                    android:id="@+id/nextMatchScore2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0" />
 
                 <TextView
                     android:id="@+id/nextMatchTeam2"

@@ -1,21 +1,15 @@
 package com.example.bacar.generationschallenge.Controller.Adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bacar.generationschallenge.Model.Equipe;
-import com.example.bacar.generationschallenge.Model.Joueurs;
 import com.example.bacar.generationschallenge.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,7 +81,7 @@ public class ClassementEquipeAdapter extends RecyclerView.Adapter<ClassementEqui
 
         if(position < 3)
             parent.classementCard.setBackgroundColor(color1);
-        else if (position == 10)
+        else if (position == team.size()-1)
             parent.classementCard.setBackgroundColor(color2);
 
     }

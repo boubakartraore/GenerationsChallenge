@@ -55,8 +55,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
         String jour, heure;
 
-        jour = new myDate().myDate(item.getDate());
-        heure = new myDate().myHeure(item.getDate());
+        jour = new myDate().myDate(new myDate().stringToDate(item.getDate()));
+        heure = new myDate().myHeure(new myDate().stringToDate(item.getDate()));
 
         parent.matchDay.setText("Match: " + item.getJournée().toString());
         parent.matchDate.setText("Le " + jour + " à " + heure);

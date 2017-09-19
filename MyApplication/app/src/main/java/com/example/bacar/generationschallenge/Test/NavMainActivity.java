@@ -23,8 +23,11 @@ import android.view.MenuItem;
 import com.example.bacar.generationschallenge.Controller.Classement.ButeursClassementFragment;
 import com.example.bacar.generationschallenge.Controller.Classement.TeamClassementFragment;
 import com.example.bacar.generationschallenge.Controller.Fragment.ClassementFragment;
+import com.example.bacar.generationschallenge.Controller.Fragment.ContactFragment;
 import com.example.bacar.generationschallenge.Controller.Fragment.DashboardFragment;
+import com.example.bacar.generationschallenge.Controller.Fragment.RulesFragment;
 import com.example.bacar.generationschallenge.Controller.Fragment.SeasonFragment;
+import com.example.bacar.generationschallenge.Controller.Fragment.StaffFragment;
 import com.example.bacar.generationschallenge.Controller.Fragment.TeamFragment;
 
 import com.example.bacar.generationschallenge.R;
@@ -99,7 +102,14 @@ public class NavMainActivity extends AppCompatActivity
             pushFragment(new ButeursClassementFragment());
         } else if (id == R.id.nav_season) {
             pushFragment(new SeasonFragment());
+        } else if (id == R.id.nav_rules) {
+            pushFragment(new RulesFragment());
+        } else if (id == R.id.nav_staff) {
+            pushFragment(new StaffFragment());
+        } else if (id == R.id.nav_contact) {
+            pushFragment(new ContactFragment());
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

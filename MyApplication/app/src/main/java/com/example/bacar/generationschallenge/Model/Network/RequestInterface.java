@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface RequestInterface {
 
-    @POST("api_championnat/")
+    @POST("/")
     Call<ServerPlayerResponse> operation(@Body ServerPlayerRequest request);
 
 }

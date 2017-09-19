@@ -1,6 +1,6 @@
 package com.example.bacar.generationschallenge.Model.Network;
 
-import com.example.bacar.generationschallenge.Model.Joueurs;
+import com.example.bacar.generationschallenge.Model.User;
 
 /**
  * Created by Bacar on 12/07/2017.
@@ -9,14 +9,14 @@ import com.example.bacar.generationschallenge.Model.Joueurs;
 public class ServerPlayerRequest {
 
     private String operation;
-    private Joueurs joueur;
+    private User user;
 
     public void setOperation (String operation) {
         this.operation = operation;
     }
 
-    public void setJoueur (Joueurs joueur) {
-        this.joueur = joueur;
+    public void setUser (User user) {
+        this.user = user;
     }
 
 }

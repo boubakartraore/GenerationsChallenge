@@ -1,21 +1,57 @@
 package com.example.bacar.generationschallenge.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  * Created by Bacar on 06/06/2017.
  */
 
-public class Equipe {
+public class Equipe implements Serializable {
 
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("captain")
+    @Expose
     private String captain;
-    private String colors;
-    private Integer victory;
-    private Integer defeat;
-    private Integer tie;
-    private Integer goalScored;
-    private Integer goalConceded;
+    @SerializedName("color")
+    @Expose
+    private String color;
+    @SerializedName("victory")
+    @Expose
+    private String victory;
+    @SerializedName("tie")
+    @Expose
+    private String tie;
+    @SerializedName("defeat")
+    @Expose
+    private String defeat;
+    @SerializedName("goalScored")
+    @Expose
+    private String goalScored;
+    @SerializedName("goalConceded")
+    @Expose
+    private String goalConceded;
+    @SerializedName("photo")
+    @Expose
+    private String photo;
+
+    public String getPhoto() {
+
+        String test = "https://bacar.000webhostapp.com/" + photo;
+        return test;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
     //private Integer goalDifference;
     //private Integer points;
     //private Integer matchPlayed;
@@ -23,22 +59,23 @@ public class Equipe {
     public Equipe() {
         this.name = "";
         this.captain = "";
-        this.colors = "";
-        this.victory = 0;
-        this.defeat = 0;
-        this.tie = 0;
-        this.goalScored = 0;
-        this.goalConceded = 0;
+        this.color = "";
+        this.victory = "";
+        this.defeat = "";
+        this.tie = "";
+        this.goalScored = "";
+        this.goalConceded = "";
+        this.photo = "";
         //this.goalDifference = 0;
         //this.points = 0;
         //this.matchPlayed = 0;
 
     }
 
-    public Equipe(String name, String captain, String colors, Integer victory, Integer defeat, Integer tie, Integer goalScored, Integer goalConceded) {
+    public Equipe(String name, String captain, String colors, String victory, String defeat, String tie, String goalScored, String goalConceded) {
         this.name = name;
         this.captain = captain;
-        this.colors = colors;
+        this.color = colors;
         this.victory = victory;
         this.defeat = defeat;
         this.tie = tie;
@@ -65,66 +102,75 @@ public class Equipe {
         this.captain = captain;
     }
 
+    public String getId() {
+
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getColors() {
-        return colors;
+        return color;
     }
 
     public void setColors(String colors) {
-        this.colors = colors;
+        this.color = colors;
     }
 
-    public Integer getVictory() {
+    public String getVictory() {
         return victory;
     }
 
-    public void setVictory(Integer victory) {
+    public void setVictory(String victory) {
         this.victory = victory;
     }
 
-    public Integer getDefeat() {
+    public String getDefeat() {
         return defeat;
     }
 
-    public void setDefeat(Integer defeat) {
+    public void setDefeat(String defeat) {
         this.defeat = defeat;
     }
 
-    public Integer getTie() {
+    public String getTie() {
         return tie;
     }
 
-    public void setTie(Integer tie) {
+    public void setTie(String tie) {
         this.tie = tie;
     }
 
-    public Integer getGoalScored() {
+    public String getGoalScored() {
         return goalScored;
     }
 
-    public void setGoalScored(Integer goalScored) {
+    public void setGoalScored(String goalScored) {
         this.goalScored = goalScored;
     }
 
-    public Integer getGoalConceded() {
+    public String getGoalConceded() {
         return goalConceded;
     }
 
-    public void setGoalConceded(Integer goalConceded) {
+    public void setGoalConceded(String goalConceded) {
         this.goalConceded = goalConceded;
     }
 
     public Integer goalDifference() {
-        return (goalScored - goalConceded);
+        return (Integer.valueOf(goalScored) - Integer.valueOf(goalConceded));
     }
 
 
     public Integer points() {
-        return ((this.victory * 3) + this.tie);
+        return ((Integer.valueOf(this.victory) * 3) + Integer.valueOf(this.tie));
     }
 
 
     public Integer matchPlayed() {
-        return (this.victory + this.tie + this.defeat);
+        return (Integer.valueOf(this.victory) + Integer.valueOf(this.tie) + Integer.valueOf(this.defeat));
     }
 
     public static class EquipeComparator implements Comparator<Equipe> {

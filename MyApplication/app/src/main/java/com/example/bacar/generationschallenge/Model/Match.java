@@ -1,29 +1,60 @@
 package com.example.bacar.generationschallenge.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Bacar on 06/06/2017.
  */
 
-public class Match {
+public class Match implements Serializable {
 
-    private Integer journée;
-    private Date date;
+    @SerializedName("Id")
+    @Expose
+    private String id;
+    @SerializedName("Day")
+    @Expose
+    private String journée;
+    @SerializedName("Date")
+    @Expose
+    private String date;
+    @SerializedName("EquipeDom")
+    @Expose
     private String equipeDomicile;
+    @SerializedName("EquipeExt")
+    @Expose
     private String equipeExterieur;
-    private Integer scoreEquipeDomicile;
-    private Integer scoreEquipeExterieur;
+    @SerializedName("ScoreDom")
+    @Expose
+    private String scoreEquipeDomicile;
+    @SerializedName("ScoreExt")
+    @Expose
+    private String scoreEquipeExterieur;
+    @SerializedName("Played")
+    @Expose
     private Boolean played;
 
+
     public Match() {
-        this.journée = 0;
-        this.date = new Date();
+        this.id = "";
+        this.journée = "";
+        this.date = "";
         this.equipeDomicile = "";
         this.equipeExterieur = "";
-        this.scoreEquipeDomicile = 0;
-        this.scoreEquipeExterieur = 0;
+        this.scoreEquipeDomicile = "";
+        this.scoreEquipeExterieur = "";
         this.played = Boolean.FALSE;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Boolean getPlayed() {
@@ -34,7 +65,7 @@ public class Match {
         this.played = played;
     }
 
-    public Match(Integer journee, Date date, String equipeDomicile, String equipeExterieur, Integer scoreEquipeDomicile, Integer scoreEquipeExterieur) {
+    public Match(String journee, String date, String equipeDomicile, String equipeExterieur, String scoreEquipeDomicile, String scoreEquipeExterieur) {
         this.journée = journee;
         this.date = date;
         this.equipeDomicile = equipeDomicile;
@@ -44,20 +75,19 @@ public class Match {
         this.played = Boolean.FALSE;
 
     }
-
-    public Integer getJournée() {
+    public String getJournée() {
         return journée;
     }
 
-    public void setJournée(Integer journée) {
+    public void setJournée(String journée) {
         this.journée = journée;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -77,19 +107,20 @@ public class Match {
         this.equipeExterieur = equipeExterieur;
     }
 
-    public Integer getScoreEquipeDomicile() {
+    public String getScoreEquipeDomicile() {
         return scoreEquipeDomicile;
     }
 
-    public void setScoreEquipeDomicile(Integer scoreEquipeDomicile) {
+    public void setScoreEquipeDomicile(String scoreEquipeDomicile) {
         this.scoreEquipeDomicile = scoreEquipeDomicile;
     }
 
-    public Integer getScoreEquipeExterieur() {
+    public String getScoreEquipeExterieur() {
         return scoreEquipeExterieur;
     }
 
-    public void setScoreEquipeExterieur(Integer scoreEquipeExterieur) {
+    public void setScoreEquipeExterieur(String scoreEquipeExterieur) {
         this.scoreEquipeExterieur = scoreEquipeExterieur;
     }
+
 }

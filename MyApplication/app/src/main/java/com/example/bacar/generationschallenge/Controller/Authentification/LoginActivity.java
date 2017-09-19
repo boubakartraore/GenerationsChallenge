@@ -4,7 +4,7 @@ package com.example.bacar.generationschallenge.Controller.Authentification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.Snackbar;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bacar.generationschallenge.Controller.MainActivity;
-import com.example.bacar.generationschallenge.Model.Joueurs;
+import com.example.bacar.generationschallenge.Model.User;
 import com.example.bacar.generationschallenge.Model.Network.RequestInterface;
 import com.example.bacar.generationschallenge.Model.Network.ServerPlayerRequest;
 import com.example.bacar.generationschallenge.Model.Network.ServerPlayerResponse;
@@ -75,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (!isValidEmail(email)) {
                     //Set error message for email field
-                    login_mail.setError("Invalid Email");
+                    login_mail.setError("Email invalide");
                 }
 
                 if (!isValidPassword(pass)) {
@@ -87,16 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     //progress.setVisibility(View.VISIBLE);
 
                     loginProcess(email, pass);
-                    /*Toast.makeText(getApplicationContext(), "Vous etes correctement loggé", Toast.LENGTH_SHORT).show();
-                    sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("Logged", 1);
-                    editor.commit();
-                    Intent intent = new Intent(LoginActivity.this, NavMainActivity.class);
-                    startActivity(intent);
-                    finish();*/
-                } else {
-                    Toast.makeText(getApplicationContext(), "Données incorrecte", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -127,31 +117,44 @@ public class LoginActivity extends AppCompatActivity {
     private void loginProcess(String email,String password){
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://orgemontcitychallenge.esy.es/")
+                .baseUrl("https://bacar.000webhostapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RequestInterface requestInterface = retrofit.create(RequestInterface.class);
 
-        Joueurs joueurs = new Joueurs();
-        joueurs.setMail(email);
-        joueurs.setPassword(password);
+        final User user = new User();
+        user.setMail(email);
+        user.setPassword(password);
         ServerPlayerRequest request = new ServerPlayerRequest();
         request.setOperation("login");
-        request.setJoueur(joueurs);
+        request.setUser(user);
+
+        Toast.makeText(LoginActivity.this, "Lancement de la recherche", Toast.LENGTH_LONG).show();
+
         Call<ServerPlayerResponse> response = requestInterface.operation(request);
 
         response.enqueue(new Callback<ServerPlayerResponse>() {
             @Override
             public void onResponse(Call<ServerPlayerResponse> call, retrofit2.Response<ServerPlayerResponse> response) {
 
+                //Toast.makeText(LoginActivity.this, "trouvé", Toast.LENGTH_LONG).show();
+
                 ServerPlayerResponse resp = response.body();
                 Toast.makeText(LoginActivity.this, resp.getMessage(), Toast.LENGTH_LONG).show();
 
                 if(resp.getResult().equals("success")){
+                    sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("Logged", 1);
+                    editor.putString("lastname",resp.getUser().getLastname());
+                    editor.putString("firstname",resp.getUser().getFirstname());
+                    editor.putString("username",resp.getUser().getUsername());
+                    editor.putString("phone",resp.getUser().getTelephone());
+                    editor.putString("team",resp.getUser().getTeam_id());
+                    editor.putString("poste",resp.getUser().getPoste());
                     editor.putString("mail",resp.getUser().getMail());
+                    editor.putString("goal", resp.getUser().getGoal());
                     editor.apply();
                     Intent intent = new Intent(LoginActivity.this, NavMainActivity.class);
                     startActivity(intent);
@@ -164,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ServerPlayerResponse> call, Throwable t) {
 
-                progress.setVisibility(View.INVISIBLE);
+                //progress.setVisibility(View.INVISIBLE);
                 Log.d("FAILURE","failed");
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 

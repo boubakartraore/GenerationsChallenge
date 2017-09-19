@@ -10,15 +10,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.bacar.generationschallenge.Controller.Season.TeamCalendarActivity;
 import com.example.bacar.generationschallenge.Controller.myDate;
+import com.example.bacar.generationschallenge.Model.AllMatch;
 import com.example.bacar.generationschallenge.Model.Equipe;
 import com.example.bacar.generationschallenge.Model.Match;
+import com.example.bacar.generationschallenge.Model.Network.MatchInterface;
 import com.example.bacar.generationschallenge.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -33,10 +42,12 @@ public class TeamInfoActivity extends AppCompatActivity {
 
     /* ********************** */
 
-    private String rcv;
+    private Equipe rcv;
 
     private Equipe current;
     private Match currentMAtch;
+
+    private Match nextGame;
 
     private TextView teamNAme;
     private TextView teamCaptain;
@@ -60,15 +71,13 @@ public class TeamInfoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        rcv = getIntent().getStringExtra("team");
+        rcv = (Equipe) getIntent().getSerializableExtra("team");
 
         teamImage = (ImageView) findViewById(R.id.team_image);
         teamNAme = (TextView) findViewById(R.id.team_name);
         teamCaptain = (TextView) findViewById(R.id.team_captain);
         nextMatchTeam1 = (TextView) findViewById(R.id.nextMatchTeam1);
         nextMatchTeam2 = (TextView) findViewById(R.id.nextMatchTeam2);
-        nextMatchScore1 = (TextView) findViewById(R.id.nextMatchScore1);
-        nextMatchScore2 = (TextView) findViewById(R.id.nextMatchScore2);
         teamCalButton = (Button) findViewById(R.id.teamCalButton);
         playersButton = (Button) findViewById(R.id.playersButton);
         nextMatch = (TextView) findViewById(R.id.nextMatch);
@@ -78,28 +87,70 @@ public class TeamInfoActivity extends AppCompatActivity {
 
         //curDate = new Date();
 
-        current = new Equipe("Equipe 1", "Player 1", "Blue", 0,0,0,0,0);
-        currentMAtch = new Match(0, new Date(), "Equipe 1", "Equipe 2", 2, 0);
+        //current = new Equipe("Equipe 1", "Player 1", "Blue", 0,0,0,0,0);
+        //currentMAtch = new Match(0, new Date(), "Equipe 1", "Equipe 2", 2, 0);
 
-        String dateMatch = new myDate().myDate(currentMAtch.getDate());
-        String heureMatch = new myDate().myHeure(currentMAtch.getDate());
+        //String dateMatch = new myDate().myDate(currentMAtch.getDate());
+        //String heureMatch = new myDate().myHeure(currentMAtch.getDate());
 
-        teamImage.setImageResource(R.drawable.team);
-        teamNAme.setText(rcv);
-        teamCaptain.setText(current.getCaptain());
-        nextMatchTeam1.setText(currentMAtch.getEquipeDomicile());
-        nextMatchTeam2.setText(currentMAtch.getEquipeExterieur());
-        nextMatchScore1.setText(currentMAtch.getScoreEquipeDomicile().toString());
-        nextMatchScore2.setText(currentMAtch.getScoreEquipeExterieur().toString());
-        teamNextDay.setText(currentMAtch.getJournée().toString());
-        teamNextMatchDate.setText("Le " + dateMatch + " à " + heureMatch);
+        //teamImage.setImageResource(R.drawable.team);
+
+        Picasso.with(getApplicationContext())
+                .load(rcv.getPhoto())
+                .placeholder(R.drawable.team)
+                .into(teamImage);
+
+        teamNAme.setText(rcv.getName());
+        teamCaptain.setText(rcv.getCaptain());
+        //nextMatchTeam1.setText(currentMAtch.getEquipeDomicile());
+        //nextMatchTeam2.setText(currentMAtch.getEquipeExterieur());
+        //nextMatchScore1.setText(currentMAtch.getScoreEquipeDomicile());
+        //nextMatchScore2.setText(currentMAtch.getScoreEquipeExterieur());
+        //teamNextDay.setText(currentMAtch.getJournée());
+        //teamNextMatchDate.setText("Le " + dateMatch + " à " + heureMatch);
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://bacar.000webhostapp.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MatchInterface requestTeamInterface = retrofit.create(MatchInterface.class);
+
+        final Call<AllMatch> requete = requestTeamInterface.getMatch();
+
+        requete.enqueue(new Callback<AllMatch>() {
+
+            @Override
+            public void onResponse(Call<AllMatch> call, retrofit2.Response<AllMatch> response) {
+
+                if (response.isSuccessful()) {
+
+                    AllMatch test = response.body();
+
+                    nextGame = test.getNextMatch(rcv.getName());
+
+                    teamNextDay.setText(nextGame.getJournée());
+                    teamNextMatchDate.setText("Le " + nextGame.getDate());
+                    nextMatchTeam1.setText(nextGame.getEquipeDomicile());
+                    nextMatchTeam2.setText(nextGame.getEquipeExterieur());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllMatch> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
         playersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TeamInfoActivity.this, PlayersActivity.class);
-                i.putExtra("team", rcv);
+                i.putExtra("team", rcv.getName());
                 startActivity(i);
             }
         });
@@ -111,8 +162,8 @@ public class TeamInfoActivity extends AppCompatActivity {
                 sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("Calendar Team", 1);
-                editor.commit();
-                i.putExtra("team", rcv);
+                editor.apply();
+                i.putExtra("team", rcv.getName());
                 startActivity(i);
             }
         });

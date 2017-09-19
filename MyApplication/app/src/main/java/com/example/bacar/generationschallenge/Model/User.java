@@ -1,7 +1,9 @@
 package com.example.bacar.generationschallenge.Model;
 
-import org.json.JSONObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import static java.sql.Types.NULL;
@@ -10,31 +12,67 @@ import static java.sql.Types.NULL;
  * Created by Bacar on 30/05/2017.
  */
 
-public class Joueurs {
+public class User implements Serializable {
 
-    private Integer id;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("firstname")
+    @Expose
     private String firstname;
+    @SerializedName("lastname")
+    @Expose
     private String lastname;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("mail")
+    @Expose
     private String mail;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("salt")
+    @Expose
+    private String salt;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("team_id")
+    @Expose
+    private String teamId;
+    @SerializedName("poste")
+    @Expose
     private String poste;
-    private Integer team_id;
-    private String telephone;
-    private Integer goal;
+    @SerializedName("role")
+    @Expose
+    private String role;
+    @SerializedName("goal")
+    @Expose
+    private String goal;
 
-    public Joueurs() {
-        this.id = NULL;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public User() {
+        this.id = "";
         this.firstname = "";
         this.lastname = "";
         this.mail = "";
         this.password = "";
         this.poste = "";
-        this.team_id = NULL;
-        this.telephone = "";
-        this.goal = 0;
+        this.teamId = "";
+        this.phone = "";
+        this.goal = "";
+        this.role = "";
     }
 
-    /*public Joueurs(JSONObject jObject){
+    /*public User(JSONObject jObject){
         this.id = jObject.optInt("id");
         this.firstname = jObject.optString("firstname");
         this.lastname = jObject.optString("lastname");
@@ -46,25 +84,26 @@ public class Joueurs {
         this.goal = jObject.optInt("goal");
     }*/
 
-    public Joueurs(Integer id, String firstname, String lastname, String mail, String password, String poste, Integer team_id, String telephone, Integer goal) {
+    public User(String id, String firstname, String lastname, String mail, String password, String poste, String team_id, String telephone, String goal, String role) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.mail = mail;
         this.password = password;
         this.poste = poste;
-        this.team_id = team_id;
-        this.telephone = telephone;
+        this.teamId = team_id;
+        this.phone = telephone;
         this.goal = goal;
+        this.role = role;
 
     }
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -108,34 +147,42 @@ public class Joueurs {
         this.poste = poste;
     }
 
-    public Integer getTeam_id() {
-        return team_id;
+    public String getTeam_id() {
+        return teamId;
     }
 
-    public void setTeam_id(Integer team_id) {
-        this.team_id = team_id;
+    public void setTeam_id(String team_id) {
+        this.teamId = team_id;
     }
 
     public String getTelephone() {
-        return telephone;
+        return phone;
     }
 
     public void setTelephone(String telephone) {
-        this.telephone = telephone;
+        this.phone = telephone;
     }
 
-    public Integer getGoal() {
+    public String getGoal() {
         return goal;
     }
 
     public void setGoal(Integer goal) {
-        this.goal = goal;
+        this.goal = goal.toString();
     }
 
-    public static class JoueursComparator implements Comparator<Joueurs> {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public static class JoueursComparator implements Comparator<User> {
         @Override
-        public int compare(Joueurs o1, Joueurs o2) {
-            return o2.getGoal().compareTo(o1.getGoal());
+        public int compare(User o1, User o2) {
+            return Integer.valueOf(o2.getGoal()).compareTo(Integer.valueOf(o1.getGoal()));
         }
     }
 }

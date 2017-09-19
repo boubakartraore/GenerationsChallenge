@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
     >
 
     <ScrollView
@@ -40,26 +39,22 @@
                     android:id="@+id/profilFirstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:text="Prenom" />
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                 <TextView
                     android:id="@+id/profilLastname"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nom de famille" />
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/profilMail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="e-Mail" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/profilPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Téléphone" />
+                    android:layout_height="wrap_content" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -78,8 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Poste" />
+                        android:gravity="center" />
 
                     <ImageView
                         android:id="@+id/profilPosteImage"
@@ -120,8 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="Nom d'équipe" />
+                        android:layout_weight="1" />
 
                     <ImageView
                         android:id="@+id/profilTeamImage"
@@ -157,8 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:layout_gravity="center"
-                        android:text="Date" />
+                        android:layout_gravity="center" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -173,16 +165,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:text="Equipe Dom." />
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/profilLastMatchScoreDom"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:text="0" />
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/profilSeparator"
@@ -197,16 +187,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:text="0" />
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/profilLastMatchExt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:text="Equipe Ext." />
+                            android:gravity="center" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -237,8 +225,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginTop="15dp"
-                       android:layout_gravity="center"
-                       android:text="Date" />
+                       android:layout_gravity="center" />
 
 
                    <LinearLayout
@@ -253,8 +240,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_weight="0.333"
-                           android:gravity="center"
-                           android:text="Equipe Dom." />
+                           android:gravity="center" />
 
                        <TextView
                            android:id="@+id/vs"
@@ -269,19 +255,33 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_weight="0.333"
-                           android:gravity="center"
-                           android:text="Equipe Ext." />
+                           android:gravity="center" />
                    </LinearLayout>
 
                </LinearLayout>
 
             </android.support.v7.widget.CardView>
-        <Button
-            android:id="@+id/profilButton"
-            android:layout_width="wrap_content"
-            android:layout_gravity="end"
-            android:layout_height="wrap_content"
-            android:text="Modifier mes infos" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/profilButton"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:text="Changer mon mot de passe" />
+
+                <Button
+                    android:id="@+id/profilDeconnexion"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:text="Deconnexion" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
